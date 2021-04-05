@@ -1,0 +1,75 @@
+<hr>
+<div class="row">
+<div class="col">
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()">
+<!--formGroup-it tells the angular please take my group-->
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="btn btn-success"
+                [disabled]="!recipeForm.valid" >SAVE</button>
+                <button type="button" class="btn btn-danger" (click)="onCanceal()">CANCEL</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text"
+                     id="name" class="form-control" formControlName="name">
+                     <!--formControlName-It tells the angular hey whats the name of 
+                    input my ts file-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="image-path">Image URL</label>
+                    <input type="text"
+                    id="imagepath"  class="form-control" formControlName="imagepath" 
+                    #imagepath>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <img [src]="imagepath.value" class="img-responsive">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea type="text"
+                    id="description" class="form-control" rows="6" 
+                    formControlName="description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" formArrayName="ingredients">
+                <!--formArrayName it connect to array input-->
+               <div class="row"  
+               *ngFor="let ingredientCtrl of recipeForm.get('ingredients').value; let i=index"
+               [formGroupName]="i" >
+                   <div class="col" >
+                       <input type="text" class="form-control" formControlName="name">
+                   </div>
+                   <div class="col">
+                    <input type="number" class="form-control" formControlName="amount">
+                </div>
+                <div class="col">
+                    <button class="btn btn-danger" type="button"  (click)="onRemoveIngredient(i)">X</button>
+                </div>
+               </div>
+               <hr>
+               <div class="row">
+                   <div class="col">
+                       <button class="btn btn-success" type="button" (click)="onAddIngredient()">Add Ingredient</button>
+                   </div>
+               </div>
+            </div>
+        </div>
+    </form>
+</div>
+</div>

@@ -1,0 +1,40 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+
+<div class="container-fluid">
+
+<div class="navbar-header">
+      <a href="#" class="navbar-brand">Recipe Book</a>    
+</div>
+
+<div class="collapse navbar-collapse" id="navbarCollapse">  
+      <ul class="navbar-nav mr-auto">
+        <!--<li class="nav-item"><a class="nav-link" href="#" (click)="onSelect('recipe')">Recipes</a></li> 
+        <li class="nav-item"><a class="nav-link"  href="#" (click)="onSelect('Shopping-list')">Shopping List</a></li>
+        -->
+        <li class="nav-item" routerLinkActive="Active" *ngIf="isAuthenticated">
+          <a class="nav-link" routerLink="/recipes">Recipes</a></li> 
+        <li class="nav-item" routerLinkActive="Active" *ngIf="!isAuthenticated">
+          <a class="nav-link" routerLink="/auth">Authentication</a></li> 
+        <li class="nav-item" routerLinkActive="Active"><a class="nav-link" routerLink="/shopping">Shopping List</a></li>
+      </ul>
+    </div>
+
+      <ul class="nav navbar-nav navbar-right mr-auto" >
+          
+        <li class="dropdown mr-5" *ngIf="isAuthenticated" appDropdown>
+          <a style="cursor: pointer;"
+           data-toggle="dropdown" role="button" ><span >Manage</span></a>
+          <ul class="dropdown-menu">
+            <li ><a style="cursor: pointer;" (click)="onSaveData()">Save Data</a></li>
+            <li><a style="cursor: pointer;" (click)="onFetchData()">Fetch Data</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item " *ngIf="isAuthenticated">
+          <a style="cursor: pointer;" (click)="onLogOut()">LogOut</a>
+        </li>
+      </ul>
+      </div>
+
+ 
+ </nav>
